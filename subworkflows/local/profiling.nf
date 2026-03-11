@@ -19,6 +19,7 @@ include { KMCP_SEARCH                                   } from '../../modules/nf
 include { KMCP_PROFILE                                  } from '../../modules/nf-core/kmcp/profile/main'
 include { GANON_CLASSIFY                                } from '../../modules/nf-core/ganon/classify/main'
 include { GANON_REPORT                                  } from '../../modules/nf-core/ganon/report/main'
+include { SINGLEM_PIPE                                  } from '../../modules/nf-core/singlem/singlem_pipe/main'
 
 workflow PROFILING {
     take:
@@ -479,6 +480,20 @@ workflow PROFILING {
         // Might be flipped - check/define what is a profile vs raw classification
         ch_raw_profiles = ch_raw_profiles.mix(GANON_REPORT.out.tre)
         ch_raw_classifications = ch_raw_classifications.mix(GANON_CLASSIFY.out.all)
+    }
+
+    if (params.run_singlem) {
+
+        ch_input_for_singlem = reads
+            .map { meta, input_reads ->
+                def profiler_meta = meta + [tool: 'singlem', db_name: 'default']
+                [profiler_meta, input_reads]
+            }
+
+        SINGLEM_PIPE(ch_input_for_singlem)
+
+        ch_versions = ch_versions.mix(SINGLEM_PIPE.out.versions.first())
+        ch_raw_profiles = ch_raw_profiles.mix(SINGLEM_PIPE.out.profile)
     }
 
     emit:

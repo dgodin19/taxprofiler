@@ -1,0 +1,25 @@
+nextflow_process {
+
+    name "Test Process SINGLEM_PIPE"
+    script "../main.nf"
+    process "SINGLEM_PIPE"
+
+    test("stub run") {
+
+        when {
+            process {
+                """
+                input[0] = [ [ id:'test', single_end:true ], file('reads.fastq.gz') ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert process.out.profile
+            assert process.out.versions
+        }
+
+        options "-stub"
+    }
+}

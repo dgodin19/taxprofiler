@@ -1,0 +1,9 @@
+Mar-11 20:00:22.178 [main] INFO  com.askimed.nf.test.App - nf-test 0.9.3
+Mar-11 20:00:22.196 [main] INFO  com.askimed.nf.test.App - Arguments: [test, --tag, singlem/pipe, --profile, docker]
+Mar-11 20:00:22.945 [main] INFO  com.askimed.nf.test.App - Nextflow Version: 25.10.3
+Mar-11 20:00:22.947 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Load config from file /workspaces/taxprofiler/nf-test.config...
+Mar-11 20:00:24.326 [main] WARN  com.askimed.nf.test.nextflow.NextflowScript - Module /workspaces/taxprofiler/subworkflows/local/profiling.nf: Dependency '/workspaces/taxprofiler/subworkflows/local/../../modules/nf-core/singlem/singlem_pipe/main.nf' not found.
+Mar-11 20:00:24.503 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Loaded 77 files from directory /workspaces/taxprofiler in 1.172 sec
+Mar-11 20:00:24.504 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Found 1 files containing tests.
+Mar-11 20:00:24.505 [main] DEBUG com.askimed.nf.test.lang.dependencies.DependencyResolver - Found files: [/workspaces/taxprofiler/tests/default.nf.test]
+Mar-11 20:00:25.151 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Found 0 tests to execute.

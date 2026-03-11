@@ -1,0 +1,39 @@
+name: "singlem_pipe"
+description: Run taxonomic profiling of metagenomic reads using SingleM pipe
+keywords:
+  - metagenomics
+  - profiling
+  - classify
+  - singlem
+
+tools:
+  - singlem:
+      description: Metagenomic marker gene-based taxonomic profiling
+      homepage: https://wwood.github.io/singlem/
+      documentation: https://wwood.github.io/singlem/tools/pipe
+      tool_dev_url: https://github.com/wwood/singlem
+      doi: "10.1038/s41587-025-02738-1"
+      licence: ["GPL-3.0"]
+
+input:
+  - meta:
+      type: map
+      description: Sample metadata (need to test and update this description)
+  - reads:
+      type: file
+      description: Input FASTQ reads
+# there might be more here but I need to run the pipeline to find out what the input is exactly, and then update this description accordingly
+
+output:
+  - profile:
+      type: file
+      description: SingleM taxonomic profile in csv format
+      pattern: "*.profile.tsv"
+
+  - versions:
+      type: file
+      description: Tool versions
+      pattern: "versions.yml"
+
+authors:
+  - JackSherry6
