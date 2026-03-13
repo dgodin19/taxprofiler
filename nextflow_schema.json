@@ -563,6 +563,26 @@
                     "fa_icon": "fas fa-toggle-on",
                     "description": "Turn on profiling with mOTUs. Requires database to be present CSV file passed to --databases"
                 },
+                "run_singlem": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-toggle-on",
+                    "description": "Turn on profiling with SingleM. Database input is optional."
+                },
+                "singlem_db": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string",
+                            "format": "directory-path",
+                            "exists": true
+                        }
+                    ],
+                    "fa_icon": "fas fa-database",
+                    "description": "Optional path to a SingleM metapackage.",
+                    "help_text": "Provide a path to a SingleM metapackage directory to pass to SingleM. If omitted, SingleM will attempt to use its default metapackage configuration."
+                },
                 "motus_use_relative_abundance": {
                     "type": "boolean",
                     "description": "Turn on printing relative abundance instead of counts.",

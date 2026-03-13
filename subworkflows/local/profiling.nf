@@ -19,7 +19,7 @@ include { KMCP_SEARCH                                   } from '../../modules/nf
 include { KMCP_PROFILE                                  } from '../../modules/nf-core/kmcp/profile/main'
 include { GANON_CLASSIFY                                } from '../../modules/nf-core/ganon/classify/main'
 include { GANON_REPORT                                  } from '../../modules/nf-core/ganon/report/main'
-include { SINGLEM_PIPE                                  } from '../../modules/nf-core/singlem/singlem_pipe/main'
+include { SINGLEM_PIPE                                  } from '../../modules/nf-core/singlem/pipe/main'
 
 workflow PROFILING {
     take:
@@ -486,13 +486,30 @@ workflow PROFILING {
 
         ch_input_for_singlem = reads
             .map { meta, input_reads ->
-                def profiler_meta = meta + [tool: 'singlem', db_name: 'default']
-                [profiler_meta, input_reads]
+
+                def normalized_reads = (input_reads instanceof List) ? input_reads : [input_reads]
+                def is_single = meta.containsKey('single_end') ? meta.single_end : (normalized_reads.size() == 1)
+
+                if (is_single && normalized_reads.size() != 1) {
+                    error "SINGLEM_PIPE expected 1 read file for single-end sample '${meta.id}', got ${normalized_reads.size()}"
+                }
+                if (!is_single && normalized_reads.size() != 2) {
+                    error "SINGLEM_PIPE expected 2 read files for paired-end sample '${meta.id}', got ${normalized_reads.size()}"
+                }
+
+                def profiler_meta = meta + [
+                    tool      : 'singlem',
+                    db_name   : params.singlem_db ? file(params.singlem_db).baseName : 'default',
+                    db        : params.singlem_db ?: null,
+                    single_end: is_single
+                ]
+
+                [profiler_meta, normalized_reads]
             }
 
         SINGLEM_PIPE(ch_input_for_singlem)
 
-        ch_versions = ch_versions.mix(SINGLEM_PIPE.out.versions.first())
+        ch_versions     = ch_versions.mix(SINGLEM_PIPE.out.versions.first())
         ch_raw_profiles = ch_raw_profiles.mix(SINGLEM_PIPE.out.profile)
     }
 

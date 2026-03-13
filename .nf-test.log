@@ -1,9 +1,20 @@
-Mar-11 20:00:22.178 [main] INFO  com.askimed.nf.test.App - nf-test 0.9.3
-Mar-11 20:00:22.196 [main] INFO  com.askimed.nf.test.App - Arguments: [test, --tag, singlem/pipe, --profile, docker]
-Mar-11 20:00:22.945 [main] INFO  com.askimed.nf.test.App - Nextflow Version: 25.10.3
-Mar-11 20:00:22.947 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Load config from file /workspaces/taxprofiler/nf-test.config...
-Mar-11 20:00:24.326 [main] WARN  com.askimed.nf.test.nextflow.NextflowScript - Module /workspaces/taxprofiler/subworkflows/local/profiling.nf: Dependency '/workspaces/taxprofiler/subworkflows/local/../../modules/nf-core/singlem/singlem_pipe/main.nf' not found.
-Mar-11 20:00:24.503 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Loaded 77 files from directory /workspaces/taxprofiler in 1.172 sec
-Mar-11 20:00:24.504 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Found 1 files containing tests.
-Mar-11 20:00:24.505 [main] DEBUG com.askimed.nf.test.lang.dependencies.DependencyResolver - Found files: [/workspaces/taxprofiler/tests/default.nf.test]
-Mar-11 20:00:25.151 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Found 0 tests to execute.
+Mar-12 17:15:22.980 [main] INFO  com.askimed.nf.test.App - nf-test 0.9.3
+Mar-12 17:15:22.998 [main] INFO  com.askimed.nf.test.App - Arguments: [test, modules/nf-core/singlem/pipe/tests/main.nf.test, --verbose]
+Mar-12 17:15:23.748 [main] INFO  com.askimed.nf.test.App - Nextflow Version: 25.10.3
+Mar-12 17:15:23.751 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Load config from file /workspaces/taxprofiler/nf-test.config...
+Mar-12 17:15:28.116 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Loaded 193 files from directory /workspaces/taxprofiler in 3.977 sec
+Mar-12 17:15:28.120 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Found 1 files containing tests.
+Mar-12 17:15:28.120 [main] DEBUG com.askimed.nf.test.lang.dependencies.DependencyResolver - Found files: [/workspaces/taxprofiler/modules/nf-core/singlem/pipe/tests/main.nf.test]
+Mar-12 17:15:28.351 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Found 3 tests to execute.
+Mar-12 17:15:28.354 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Started test plan
+Mar-12 17:15:28.355 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Process SINGLEM_PIPE' from file '/workspaces/taxprofiler/modules/nf-core/singlem/pipe/tests/main.nf.test'.
+Mar-12 17:15:28.355 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '8674e195: stub single-end'. type: com.askimed.nf.test.lang.process.ProcessTest
+Mar-12 17:15:37.600 [main] DEBUG com.askimed.nf.test.lang.extensions.SnapshotFile - Load snapshots from file '/workspaces/taxprofiler/modules/nf-core/singlem/pipe/tests/main.nf.test.snap'
+Mar-12 17:15:37.650 [main] DEBUG com.askimed.nf.test.lang.extensions.Snapshot - Snapshots 'stub single-end' match.
+Mar-12 17:15:37.651 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '8674e195: stub single-end' finished. status: PASSED
+Mar-12 17:15:37.653 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '6837540f: stub paired-end'. type: com.askimed.nf.test.lang.process.ProcessTest
+Mar-12 17:15:45.773 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '6837540f: stub paired-end' finished. status: PASSED
+Mar-12 17:15:45.774 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '6b8d7610: stub single-end with db'. type: com.askimed.nf.test.lang.process.ProcessTest
+Mar-12 17:15:53.268 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '6b8d7610: stub single-end with db' finished. status: PASSED
+Mar-12 17:15:53.268 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Process SINGLEM_PIPE' finished. snapshot file: true, skipped tests: false, failed tests: false
+Mar-12 17:15:53.269 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Executed 3 tests. 0 tests failed. Done!

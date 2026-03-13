@@ -1,0 +1,2 @@
+sample,run_accession,instrument_platform,fastq_1,fastq_2,fasta
+test_se,run1,ILLUMINA,/workspaces/taxprofiler/test_se_R1.fastq.gz,,

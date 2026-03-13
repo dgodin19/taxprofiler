@@ -1,0 +1,2 @@
+tool,db_name,db_params,db_path
+kraken2,dummy,,/workspaces/taxprofiler/tests/dummy_db

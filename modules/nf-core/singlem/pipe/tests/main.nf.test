@@ -3,23 +3,77 @@ nextflow_process {
     name "Test Process SINGLEM_PIPE"
     script "../main.nf"
     process "SINGLEM_PIPE"
+    config "./nextflow.config"
 
-    test("stub run") {
+    tag "modules"
+    tag "modules_nfcore"
+    tag "singlem"
+    tag "singlem/pipe"
+
+    test("stub single-end") {
+        options "-stub"
 
         when {
             process {
                 """
-                input[0] = [ [ id:'test', single_end:true ], file('reads.fastq.gz') ]
+                input[0] = [
+                    [ id:'test', single_end:true ],
+                    [
+                        file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_1.fastq.gz', checkIfExists: true)
+                    ]
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("stub paired-end") {
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test_pe', single_end:false, db:null ],
+                    [
+                        file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_1.fastq.gz', checkIfExists: true),
+                        file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_2.fastq.gz', checkIfExists: true)
+                    ]
+                ]
                 """
             }
         }
 
         then {
             assert process.success
-            assert process.out.profile
-            assert process.out.versions
+        }
+    }
+
+    test("stub single-end with db") {
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test_db', single_end:true, db:'/some/path/db.sdb' ],
+                    [
+                        file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_1.fastq.gz', checkIfExists: true)
+                    ]
+                ]
+                """
+            }
         }
 
-        options "-stub"
+        then {
+            assert process.success
+        }
     }
 }
